@@ -1,0 +1,8 @@
+INTRODUCTION:
+    Angular is an application design framework and development platform for creating efficient and sophisticated single-page apps.
+    Prerequisite:
+                1. HTML
+                2. CSS
+                3. JavaScript
+                4. tools such as classes and modules
+                5. TypeScript (JavaScript with types for dependency injection and using decorators for metadata)
