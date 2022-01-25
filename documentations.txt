@@ -68,3 +68,9 @@ GETTING STARTED:
                                         In StackBlitz, the preview pane on the right shows the starting state of the example application. The preview features two areas:
                                             * a top bar with the store naem, "My Store", and a checkout button
                                             * a header for a product list, "Products"
+            Create the product list:    You will update the application to display a list of products. You will use predefined product data from the "products.ts" file and methods from the "product-list.component.ts" file. This section guides you through editing the HTML, also known as the template.
+                                            1. In the "product-list" folder, open the template file "product-list.component.html"
+                                            2. Add an "*ngFor" structural directive on a <div> with let product of products (with *ngFor, the div repeats for each product in the list; Structural directives shape or reshape the DOM's structure, by adding, removing, and manipulating elements.)
+                                            3. Inside the <div>, add an <h3> and {{product.name}}. The {{product.name}} statement is an example of Angular's interpolation syntax. Interpolation {{}} lets you render the property value as text.
+                                            4. To make each product name a link to product details, add the <a> element around {{product.name}};
+                                            5. Set the title to be the products name by using the property binding [] syntax.                                             
