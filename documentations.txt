@@ -31,3 +31,9 @@ GETTING STARTED:
                                                                     Declare event listeners to listen for and respond to user actions such as keystrokes, mouse movements, clicks, and touches. You declare an event listener by specifying the event name in parentheses.
                                                                     Add additional functionality to your templates through the use of directives. The most popular directives in Angular are *ngIf and *ngFor. User directives to perform a variest of tasks, such as dynamically modifying the DOM structure. And create your own custom directives to create great user experiences.
                                             Dependency injection:   Dependency injection lets you declare the dependencies of your TypeScript classes without taking care of their instantiation. Instead, Angular handles the instantiation for you. This design pattern lets you write more testable and flexible code. Even through understanding dependency injection is not critical to start using Angular
+    Angular CLI:    The Angular CLI is the fastest, straight forward, and recomened way to develop Angular applications. The Angular CLI makes a number of tasks trouble-free.
+                        ng build: compiles an Angular app into an output directory
+                        ng server: Builds and serves your application, rebuilding on file changes
+                        ng generate: Generate or modifies files based on a schematic
+                        ng test: Runs unit tests on a given project
+                        ng e2e: Builds and serves an Angular application, then runs end-to-end tests
