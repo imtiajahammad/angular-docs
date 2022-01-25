@@ -61,3 +61,10 @@ GETTING STARTED:
                                                         * <app-top-bar>- the store name and checkout button
                                                         * <app-product-list>- the product list
                                                         * <app-product-alerts>- a component that contains the applications's alerts 
+            Create the sample project:  To create the sample project, generate teh ready-made sample project in StackBlitz(https://stackblitz.com/run?file=src/app/app.component.ts). To save your work:
+                                            1. Log into StackBlitz
+                                            2. Fork the project you generated(https://stackblitz.com/edit/angular-7qmpc5)
+                                            3. Save periodically
+                                        In StackBlitz, the preview pane on the right shows the starting state of the example application. The preview features two areas:
+                                            * a top bar with the store naem, "My Store", and a checkout button
+                                            * a header for a product list, "Products"
