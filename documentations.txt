@@ -76,3 +76,14 @@ GETTING STARTED:
                                             5. Set the title to be the products name by using the property binding [] syntax.
                                             6. Add the product descriptions. On a <p> element, use an *ngIf directive so that Angular only creates the <p> element if the current product haas a description.                                             
                                             7. Add a button so users can share a product. BInd the button's click event to the share() method in "product-list.component.ts". Event binding uses a set of parentheses, (), around the event, as in the (click) event on the <button> element.
+            Pass data to a child component: Currently the product list displays the name and description of each product. The "ProductListComponent" also defines a products property that contains imported data for each product from the products array in "products.ts".
+                                            The next step is to create a new alert feature that uses product data from the "ProductListComponent"
+                                            The alert checks the product's price, and if the price is greater thatn $700, displays a "Notify Me" button that lets users sign up for notifications when the product goes on sale.
+                                            This section walks you through creating a child component, ProductAlertsComponent that can receive data from its parent component, ProductListComponent.
+                                                1. Click on the plus sign above the current terminal to create a new terminal to run the command to generate the component
+                                                2. In the new terminal, generate a new component named "product-alerts" by running the following command.
+                                                    ng generate component product-alerts
+                                                The generator creates starter files for the three parts of the component:
+                                                    * product-alerts.component.ts
+                                                    * product-alerts.component.html
+                                                    * product-alerts.component.css
