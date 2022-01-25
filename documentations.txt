@@ -47,8 +47,17 @@ GETTING STARTED:
                             These libraries are only reequired if and when they can help you add functionality to your applications or solve a particular problem
     Try it:
             Getting started with Angular: This tutorial introduces you to the essentials of Angular by walking you through building an e-commerce site with a catalog, shopping cart, and check-out form.
-            
             Prerequisite:   
                             1. HTML
                             2. JavaScript
                             3. TypeScript
+            Take a tour of the example application: You build Angular applications with components. Components define areas of responsibility in the UI that let you reuse sets of UI functionality.
+                                                    A component consists of thress things-
+                                                                                        * A component class that handles data and functionality
+                                                                                        * An HTML template that determines the UI
+                                                                                        * Conponent-specific styles that define the look and feel
+                                                    This guide demonstrates building an application with the following components.
+                                                        * <app-root>- the first component to load and the container for the other components
+                                                        * <app-top-bar>- the store name and checkout button
+                                                        * <app-product-list>- the product list
+                                                        * <app-product-alerts>- a component that contains the applications's alerts 
