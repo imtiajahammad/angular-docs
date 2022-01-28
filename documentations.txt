@@ -92,3 +92,6 @@ GETTING STARTED:
                                                                                         * The selector, app-product-alerts, identifies the component,. By convention, Angular component selectors begin with the prefix app-, followed by the component name
                                                                                         * The template and style filenames reference the component's HTML and CSS
                                                                                         * The @Component() definition also exports the class, ProductAlertsComponent, which handles functionality for the component.
+                                                4. To set up ProductAlertsComponent to receive product data, first import Input from @angular/core.
+                                                    import { Component, OnInit, Input } from '@angular/core';
+                                                    import { Product } from '../products';
