@@ -87,3 +87,8 @@ GETTING STARTED:
                                                     * product-alerts.component.ts
                                                     * product-alerts.component.html
                                                     * product-alerts.component.css
+                                                3. Open "product-alerts-component.ts". The @Component() decorator indicates that the following class is a component. @Component() also provides metadata about the component, including its selector, templates, and styles.
+                                                    Key features in the @component() are
+                                                                                        * The selector, app-product-alerts, identifies the component,. By convention, Angular component selectors begin with the prefix app-, followed by the component name
+                                                                                        * The template and style filenames reference the component's HTML and CSS
+                                                                                        * The @Component() definition also exports the class, ProductAlertsComponent, which handles functionality for the component.
