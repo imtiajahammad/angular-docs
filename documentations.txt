@@ -95,3 +95,5 @@ GETTING STARTED:
                                                 4. To set up ProductAlertsComponent to receive product data, first import Input from @angular/core.
                                                     import { Component, OnInit, Input } from '@angular/core';
                                                     import { Product } from '../products';
+                                                5. In the ProductAlertsComponent class definition, define a property named product with an @Input decorator. The @Input() decorator indicates that the property value passes in from the component's parent, ProductListComponent.
+                                                    @Input() product!: Product;
