@@ -104,3 +104,20 @@ GETTING STARTED:
                                                 8. To display ProductAlertsComponent as a child of ProductListComponent, add the <app-product-alerts> element to product-list.component.html. Pass the current product as input to the component usingproperty binding
                                                     <app-product-alerts [product]="product"></app-product-alerts>
                                                     The new product alert component takes a product as input from the product list. With that input, it shows or hides the "Notify Me" button, based on the price of the product. The Phone XL price is over $700, so the "Notify Me" button appears on that product.
+
+            Pass data to a parent component:    To make the "Notify Me" button work, the child component needs to notify and pass the data to the parent component. The ProductAlertsComponent needs to emit an event when the user clicks "Notify Me" and the ProductListComponent needs to respont to the event.
+                                                    1. In product-alerts.component.ts, import "Output" and "EventEmitter" from "@angular/core"
+                                                        import { Component, Input, Output, EventEmitter } from 'angular/core';
+                                                        import { Product } from '../products';
+                                                    2. In the component class, define a property named "notify" with an "@Output()" decorator and an instance of EventEmitter(). Configuring "ProductAlertsComponent" with an "@Output()" allows the "ProductAlertsComponent" to emit an event when the value of the "notify" property changes.
+                                                        @Output() notify=new EventEmitter();
+                                                    3. In "product-alerets.component.html", update the "Notify Me" button with an event binding to call the notify.emit() method.
+                                                        <button (click)="notify.emit()">Notify Me</button>
+                                                    4. Define the behavior that happens when the user clicks the button. The parent, "ProductListComponent" -not the "ProductAlertsComponent"- acts when the child raises the event. In "product-list.component.ts", define an "onNotify()" method, similar to the "share()" method.
+                                                    5. Update the ProductListComponent to receive data from the "ProductAlertsComponent".
+                                                        In "product-list.component.html", bind <app-product-alerts> to the onNotify() method of the product list component. <app-product-alerts> is what displays the "Notify Me" button.
+                                                            <app-product-alerts
+                                                                [product]="product"
+                                                                (notify)="onNotify()">
+                                                            </app-product-alerts>
+                                                    6. Click the "Noitify Me" button to trigger an alert which reads, "You will be notified when the product goes on sale".
