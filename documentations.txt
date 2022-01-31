@@ -97,3 +97,5 @@ GETTING STARTED:
                                                     import { Product } from '../products';
                                                 5. In the ProductAlertsComponent class definition, define a property named product with an @Input decorator. The @Input() decorator indicates that the property value passes in from the component's parent, ProductListComponent.
                                                     @Input() product!: Product;
+                                                6. Open product-alerts.component.html and replace the placeholder paragraph with a "Notify Me" button that appears if the product price is over $700.
+                                                    *ngIf=product && product.price>700
