@@ -99,3 +99,8 @@ GETTING STARTED:
                                                     @Input() product!: Product;
                                                 6. Open product-alerts.component.html and replace the placeholder paragraph with a "Notify Me" button that appears if the product price is over $700.
                                                     *ngIf=product && product.price>700
+                                                7. The generator automatically added the ProductAlertsComponent to the AppModule to make it available to other components in the application.
+                                                    ProductAlertsComponent in declaration in app.module.ts
+                                                8. To display ProductAlertsComponent as a child of ProductListComponent, add the <app-product-alerts> element to product-list.component.html. Pass the current product as input to the component usingproperty binding
+                                                    <app-product-alerts [product]="product"></app-product-alerts>
+                                                    The new product alert component takes a product as input from the product list. With that input, it shows or hides the "Notify Me" button, based on the price of the product. The Phone XL price is over $700, so the "Notify Me" button appears on that product.
