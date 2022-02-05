@@ -47,77 +47,116 @@ GETTING STARTED:
                             These libraries are only reequired if and when they can help you add functionality to your applications or solve a particular problem
     Try it:
             Getting started with Angular: This tutorial introduces you to the essentials of Angular by walking you through building an e-commerce site with a catalog, shopping cart, and check-out form.
-            Prerequisite:   
-                            1. HTML
-                            2. JavaScript
-                            3. TypeScript
-            Take a tour of the example application: You build Angular applications with components. Components define areas of responsibility in the UI that let you reuse sets of UI functionality.
-                                                    A component consists of thress things-
-                                                                                        * A component class that handles data and functionality
-                                                                                        * An HTML template that determines the UI
-                                                                                        * Conponent-specific styles that define the look and feel
-                                                    This guide demonstrates building an application with the following components.
-                                                        * <app-root>- the first component to load and the container for the other components
-                                                        * <app-top-bar>- the store name and checkout button
-                                                        * <app-product-list>- the product list
-                                                        * <app-product-alerts>- a component that contains the applications's alerts 
-            Create the sample project:  To create the sample project, generate teh ready-made sample project in StackBlitz(https://stackblitz.com/run?file=src/app/app.component.ts). To save your work:
-                                            1. Log into StackBlitz
-                                            2. Fork the project you generated(https://stackblitz.com/edit/angular-7qmpc5)
-                                            3. Save periodically
-                                        In StackBlitz, the preview pane on the right shows the starting state of the example application. The preview features two areas:
-                                            * a top bar with the store naem, "My Store", and a checkout button
-                                            * a header for a product list, "Products"
-            Create the product list:    You will update the application to display a list of products. You will use predefined product data from the "products.ts" file and methods from the "product-list.component.ts" file. This section guides you through editing the HTML, also known as the template.
-                                            1. In the "product-list" folder, open the template file "product-list.component.html"
-                                            2. Add an "*ngFor" structural directive on a <div> with let product of products (with *ngFor, the div repeats for each product in the list; Structural directives shape or reshape the DOM's structure, by adding, removing, and manipulating elements.)
-                                            3. Inside the <div>, add an <h3> and {{product.name}}. The {{product.name}} statement is an example of Angular's interpolation syntax. Interpolation {{}} lets you render the property value as text.
-                                            4. To make each product name a link to product details, add the <a> element around {{product.name}};
-                                            5. Set the title to be the products name by using the property binding [] syntax.
-                                            6. Add the product descriptions. On a <p> element, use an *ngIf directive so that Angular only creates the <p> element if the current product haas a description.                                             
-                                            7. Add a button so users can share a product. BInd the button's click event to the share() method in "product-list.component.ts". Event binding uses a set of parentheses, (), around the event, as in the (click) event on the <button> element.
-            Pass data to a child component: Currently the product list displays the name and description of each product. The "ProductListComponent" also defines a products property that contains imported data for each product from the products array in "products.ts".
-                                            The next step is to create a new alert feature that uses product data from the "ProductListComponent"
-                                            The alert checks the product's price, and if the price is greater thatn $700, displays a "Notify Me" button that lets users sign up for notifications when the product goes on sale.
-                                            This section walks you through creating a child component, ProductAlertsComponent that can receive data from its parent component, ProductListComponent.
-                                                1. Click on the plus sign above the current terminal to create a new terminal to run the command to generate the component
-                                                2. In the new terminal, generate a new component named "product-alerts" by running the following command.
-                                                    ng generate component product-alerts
-                                                The generator creates starter files for the three parts of the component:
-                                                    * product-alerts.component.ts
-                                                    * product-alerts.component.html
-                                                    * product-alerts.component.css
-                                                3. Open "product-alerts-component.ts". The @Component() decorator indicates that the following class is a component. @Component() also provides metadata about the component, including its selector, templates, and styles.
-                                                    Key features in the @component() are
-                                                                                        * The selector, app-product-alerts, identifies the component,. By convention, Angular component selectors begin with the prefix app-, followed by the component name
-                                                                                        * The template and style filenames reference the component's HTML and CSS
-                                                                                        * The @Component() definition also exports the class, ProductAlertsComponent, which handles functionality for the component.
-                                                4. To set up ProductAlertsComponent to receive product data, first import Input from @angular/core.
-                                                    import { Component, OnInit, Input } from '@angular/core';
-                                                    import { Product } from '../products';
-                                                5. In the ProductAlertsComponent class definition, define a property named product with an @Input decorator. The @Input() decorator indicates that the property value passes in from the component's parent, ProductListComponent.
-                                                    @Input() product!: Product;
-                                                6. Open product-alerts.component.html and replace the placeholder paragraph with a "Notify Me" button that appears if the product price is over $700.
-                                                    *ngIf=product && product.price>700
-                                                7. The generator automatically added the ProductAlertsComponent to the AppModule to make it available to other components in the application.
-                                                    ProductAlertsComponent in declaration in app.module.ts
-                                                8. To display ProductAlertsComponent as a child of ProductListComponent, add the <app-product-alerts> element to product-list.component.html. Pass the current product as input to the component usingproperty binding
-                                                    <app-product-alerts [product]="product"></app-product-alerts>
-                                                    The new product alert component takes a product as input from the product list. With that input, it shows or hides the "Notify Me" button, based on the price of the product. The Phone XL price is over $700, so the "Notify Me" button appears on that product.
-
-            Pass data to a parent component:    To make the "Notify Me" button work, the child component needs to notify and pass the data to the parent component. The ProductAlertsComponent needs to emit an event when the user clicks "Notify Me" and the ProductListComponent needs to respont to the event.
-                                                    1. In product-alerts.component.ts, import "Output" and "EventEmitter" from "@angular/core"
-                                                        import { Component, Input, Output, EventEmitter } from 'angular/core';
+                Prerequisite:   
+                                1. HTML
+                                2. JavaScript
+                                3. TypeScript
+                Take a tour of the example application: You build Angular applications with components. Components define areas of responsibility in the UI that let you reuse sets of UI functionality.
+                                                        A component consists of thress things-
+                                                                                            * A component class that handles data and functionality
+                                                                                            * An HTML template that determines the UI
+                                                                                            * Conponent-specific styles that define the look and feel
+                                                        This guide demonstrates building an application with the following components.
+                                                            * <app-root>- the first component to load and the container for the other components
+                                                            * <app-top-bar>- the store name and checkout button
+                                                            * <app-product-list>- the product list
+                                                            * <app-product-alerts>- a component that contains the applications's alerts 
+                Create the sample project:  To create the sample project, generate teh ready-made sample project in StackBlitz(https://stackblitz.com/run?file=src/app/app.component.ts). To save your work:
+                                                1. Log into StackBlitz
+                                                2. Fork the project you generated(https://stackblitz.com/edit/angular-7qmpc5)
+                                                3. Save periodically
+                                            In StackBlitz, the preview pane on the right shows the starting state of the example application. The preview features two areas:
+                                                * a top bar with the store naem, "My Store", and a checkout button
+                                                * a header for a product list, "Products"
+                Create the product list:    You will update the application to display a list of products. You will use predefined product data from the "products.ts" file and methods from the "product-list.component.ts" file. This section guides you through editing the HTML, also known as the template.
+                                                1. In the "product-list" folder, open the template file "product-list.component.html"
+                                                2. Add an "*ngFor" structural directive on a <div> with let product of products (with *ngFor, the div repeats for each product in the list; Structural directives shape or reshape the DOM's structure, by adding, removing, and manipulating elements.)
+                                                3. Inside the <div>, add an <h3> and {{product.name}}. The {{product.name}} statement is an example of Angular's interpolation syntax. Interpolation {{}} lets you render the property value as text.
+                                                4. To make each product name a link to product details, add the <a> element around {{product.name}};
+                                                5. Set the title to be the products name by using the property binding [] syntax.
+                                                6. Add the product descriptions. On a <p> element, use an *ngIf directive so that Angular only creates the <p> element if the current product haas a description.                                             
+                                                7. Add a button so users can share a product. BInd the button's click event to the share() method in "product-list.component.ts". Event binding uses a set of parentheses, (), around the event, as in the (click) event on the <button> element.
+                Pass data to a child component: Currently the product list displays the name and description of each product. The "ProductListComponent" also defines a products property that contains imported data for each product from the products array in "products.ts".
+                                                The next step is to create a new alert feature that uses product data from the "ProductListComponent"
+                                                The alert checks the product's price, and if the price is greater thatn $700, displays a "Notify Me" button that lets users sign up for notifications when the product goes on sale.
+                                                This section walks you through creating a child component, ProductAlertsComponent that can receive data from its parent component, ProductListComponent.
+                                                    1. Click on the plus sign above the current terminal to create a new terminal to run the command to generate the component
+                                                    2. In the new terminal, generate a new component named "product-alerts" by running the following command.
+                                                        ng generate component product-alerts
+                                                    The generator creates starter files for the three parts of the component:
+                                                        * product-alerts.component.ts
+                                                        * product-alerts.component.html
+                                                        * product-alerts.component.css
+                                                    3. Open "product-alerts-component.ts". The @Component() decorator indicates that the following class is a component. @Component() also provides metadata about the component, including its selector, templates, and styles.
+                                                        Key features in the @component() are
+                                                                                            * The selector, app-product-alerts, identifies the component,. By convention, Angular component selectors begin with the prefix app-, followed by the component name
+                                                                                            * The template and style filenames reference the component's HTML and CSS
+                                                                                            * The @Component() definition also exports the class, ProductAlertsComponent, which handles functionality for the component.
+                                                    4. To set up ProductAlertsComponent to receive product data, first import Input from @angular/core.
+                                                        import { Component, OnInit, Input } from '@angular/core';
                                                         import { Product } from '../products';
-                                                    2. In the component class, define a property named "notify" with an "@Output()" decorator and an instance of EventEmitter(). Configuring "ProductAlertsComponent" with an "@Output()" allows the "ProductAlertsComponent" to emit an event when the value of the "notify" property changes.
-                                                        @Output() notify=new EventEmitter();
-                                                    3. In "product-alerets.component.html", update the "Notify Me" button with an event binding to call the notify.emit() method.
-                                                        <button (click)="notify.emit()">Notify Me</button>
-                                                    4. Define the behavior that happens when the user clicks the button. The parent, "ProductListComponent" -not the "ProductAlertsComponent"- acts when the child raises the event. In "product-list.component.ts", define an "onNotify()" method, similar to the "share()" method.
-                                                    5. Update the ProductListComponent to receive data from the "ProductAlertsComponent".
-                                                        In "product-list.component.html", bind <app-product-alerts> to the onNotify() method of the product list component. <app-product-alerts> is what displays the "Notify Me" button.
-                                                            <app-product-alerts
-                                                                [product]="product"
-                                                                (notify)="onNotify()">
-                                                            </app-product-alerts>
-                                                    6. Click the "Noitify Me" button to trigger an alert which reads, "You will be notified when the product goes on sale".
+                                                    5. In the ProductAlertsComponent class definition, define a property named product with an @Input decorator. The @Input() decorator indicates that the property value passes in from the component's parent, ProductListComponent.
+                                                        @Input() product!: Product;
+                                                    6. Open product-alerts.component.html and replace the placeholder paragraph with a "Notify Me" button that appears if the product price is over $700.
+                                                        *ngIf=product && product.price>700
+                                                    7. The generator automatically added the ProductAlertsComponent to the AppModule to make it available to other components in the application.
+                                                        ProductAlertsComponent in declaration in app.module.ts
+                                                    8. To display ProductAlertsComponent as a child of ProductListComponent, add the <app-product-alerts> element to product-list.component.html. Pass the current product as input to the component usingproperty binding
+                                                        <app-product-alerts [product]="product"></app-product-alerts>
+                                                        The new product alert component takes a product as input from the product list. With that input, it shows or hides the "Notify Me" button, based on the price of the product. The Phone XL price is over $700, so the "Notify Me" button appears on that product.
+
+                Pass data to a parent component:    To make the "Notify Me" button work, the child component needs to notify and pass the data to the parent component. The ProductAlertsComponent needs to emit an event when the user clicks "Notify Me" and the ProductListComponent needs to respont to the event.
+                                                        1. In product-alerts.component.ts, import "Output" and "EventEmitter" from "@angular/core"
+                                                            import { Component, Input, Output, EventEmitter } from 'angular/core';
+                                                            import { Product } from '../products';
+                                                        2. In the component class, define a property named "notify" with an "@Output()" decorator and an instance of EventEmitter(). Configuring "ProductAlertsComponent" with an "@Output()" allows the "ProductAlertsComponent" to emit an event when the value of the "notify" property changes.
+                                                            @Output() notify=new EventEmitter();
+                                                        3. In "product-alerets.component.html", update the "Notify Me" button with an event binding to call the notify.emit() method.
+                                                            <button (click)="notify.emit()">Notify Me</button>
+                                                        4. Define the behavior that happens when the user clicks the button. The parent, "ProductListComponent" -not the "ProductAlertsComponent"- acts when the child raises the event. In "product-list.component.ts", define an "onNotify()" method, similar to the "share()" method.
+                                                        5. Update the ProductListComponent to receive data from the "ProductAlertsComponent".
+                                                            In "product-list.component.html", bind <app-product-alerts> to the onNotify() method of the product list component. <app-product-alerts> is what displays the "Notify Me" button.
+                                                                <app-product-alerts
+                                                                    [product]="product"
+                                                                    (notify)="onNotify()">
+                                                                </app-product-alerts>
+                                                        6. Click the "Noitify Me" button to trigger an alert which reads, "You will be notified when the product goes on sale".
+            Adding navigation:
+                                Associate a URL path with a component:  The application already uses the Angular "Router" to navigate to the "ProductListComponent". This section shows you how to define a route to show individual product details.
+                                                                            1. Generate a new component for product details. In the terminal generate a new "product-details" component by running the following command:
+                                                                                ng generate component product-details
+                                                                            2. In "app.module.ts", add a route for product detials, with a path of "products/:productId" and "ProductDetailsComponent" for the component.
+                                                                            3. Open product-list.component.html
+                                                                            4. Modify the product name anchor to include a "routerLink" with the product.id as a parameter.
+                                                                                <a [title]="product.name + 'details'"
+                                                                                    [routerLink]="['/products', product.id]">
+                                                                                    {{product.name}}
+                                                                                    </a>
+                                                                               The "RouterLink" directive helps you customize the anchor element. In this case, the route, or URL, contains one fixed segment, "/products". The final segment is variable, inserting the id property of the current product. For example, the URL for a product with an id of 1 wourld be similar to
+                                                                                https://getting-started-myfork.stackblitz.io/products/1
+                                                                            5. Verify that the router works as intended by clicking the product name. The application should display the "ProductDetailsComponent", which currently says "product-details works!"
+                                                                               Notice that the URL in the preview window changes. The final segment is products/# where # is the number of the route you clicked.
+                                View product details:   The "ProductDetailsComponent" handles the display of each product. THe Angular Router displays components based on the browser's URL and your defined routes.
+                                                        In this section, you will use the Angular Router to combile the products data and route information to display the specific details for each product.
+                                                            1. In "product-details.component.ts", import "ActivatedRoute" from "@angular/router", and the products array from ../products.
+                                                                import { Component, OnInt } from '@angular/core'
+                                                                input { ActivatedRoute } from '@angular/router'
+                                                                input { Product, products } from '../products';
+                                                            2. Define the "product" property
+                                                                product: Product| undefined;
+                                                            3. Inject "ActivatedRoute" into the "constructor()" b adding private route: ActivatedRoute as an argulment within the constructor's parentheses.
+                                                                constructor(private route: ActivatedRoute){}
+                                                               "ActivatedRoute" is specific to each component that the Angular Router loads. "ActivatedRoute" contains information about the route and the route's parameters.
+                                                                By injecting "ActivatedRoute", you are Configuring the component to use a service. The Managing Data step covers services in more detail.
+                                                            4. In the "ngOnInit()" method, extract the "productId" from the route parameters and find the corresponding product in the "products" array.
+                                                                ngOnInit(){
+                                                                    const routeParams=this.route.snapshot.paramMap;
+                                                                    const productIdFromRoute=Number(routeParams.get('productId'));
+                                                                    this.product= products.find(product => product.id === productIdFromRoute );
+                                                                }
+                                                                The route parameters correspond to the path variables you define in the route. To access the route parameters, we use "route.snapshot", which is the "ActivatedRouteSnapshot" that contains information about the active route at that particular moment in time. The URL that matches the route provides the productId. Angular uses the productId to display the details for each unique product.
+                                                            5. Update the "ProductDetailsComponent" template to display product details with an "*ngIf". If a product exists, the <div> renders with a name, price, and description.
+                                                                The line <h4> {{ product.price | currency }} </h4>, uses the currency pipe to transform "product.price" from a number to a currenct string. A pipe is a way you can transform data in your HTML template. 
+                                                                    When users click on a name in the product list, the router navigates them to the distinct URL for the product, shows the "ProductDetialsComponent", and displays the product details.
+
+
