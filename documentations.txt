@@ -553,7 +553,17 @@ Understanding Angular:
                                                                                         * Stop  interval times.
                                                                                         * Unregister all callbacks that the directive registered with global or application services.
                                                                                     The "ngOnDestroy()" method is also the time to notify another part of the application that the component is going away.
-                                                        
+                                                        General examples:
+                                                                        The following examples demonstrate the call sequence and relative frequency of the various lifecycle events, and how the hooks can be used separately or together for components and directives.
+                                                                        Sequence and frequency of all lifecycle events: (https://angular.io/guide/lifecycle-hooks)
+                                                                                                                        To show how Angular calls the hooks in the expected order, the "PeekABooComponent" demonstrates all of the hooks in one component.
+                                                                                                                        In practice you would rarely, if ever, implement all of the interfaces the way this demo does.
+                                                                                                                        The following snapshot reflets the state eof the log after the user clicked the Create.. button and then the Destory.. buton.
+                                                                                                                        The sequence of log messages follows the prescibed hook calling order: OnChanges, OnInt, Docheck(2x), AfterContentInit, AfterContentChecked(2x), AfterViewInit, AfterViewChecked(3x), and OnDestroy.
+                                                                                                                        Notice that the log confirms that input properties(the name property in this case) have no assigned values at construction. The input properties are available to the "OnInit()" method for further initialization.
+                                                                                                                        Had the user clicked the "Update Hero" button, the log would show another Onchanges and two more triplets of DoCheck, AfterContentChecked and AfterViewChecked. Notice that these three hooks fire ofter, so it is important to keep their logic as lean as possible.
+
+
 
 
 
