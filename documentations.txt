@@ -506,6 +506,15 @@ Understanding Angular:
                                                                                 }
                                                                             }
                                                                         You do not have to implement all of the lifecycle hooks, just the ones you need.
+                                                            Lifecycle event sequence:
+                                                                                        After your application instantiates a component or directive by calling its constructor, Angular calls the hook methods you have implemented at the appropriate point in the lifecycle of that instance.
+                                                                                        Angular executes hook methods in the following sequence. Use them to perform the following kinds of operations.
+                                                                                            ngOnChanges():
+                                                                                                            Purpose: Respond when Angular sets or resets data-bound input properties. The method receives a "SimpleChanges" object of current and previous property values. Note that this happens very frequently, so any operation you perform here impacts performance significantly.
+                                                                                                            Timing: Called before "ngOnInit()" (if the component has bound inputs) and whenever one or more data-bound input properties change. Note that if your component has no inputs or you use it without providing any inputs, the framework will not call "ngOnChanges()".
+                                                                                           
+
+
 
 
 
