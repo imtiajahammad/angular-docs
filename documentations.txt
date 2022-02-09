@@ -591,7 +591,26 @@ Understanding Angular:
                                                                         Use component and directive hooks together:
                                                                                                         In this example, a "CounterComponent" uses the "ngOnChanges()" method to log a chnage every time the parent component increments its input "counter" property
                                                                                                         This example applies the "SpyDirective" from the previous example to the "CounterComponent" log, to watch the creation and destruction of log entries.
-                                              
+                                                        Using change detection hooks:  
+                                                                                Angular calls the "ngOnChanges()" method of a component or directive whenever it detects changes to the input properties. The onChanges example demonstrates this by monitoring the OnChanges() hook.
+                                                                                    ngOnChanges(changes: SimpleChanges){
+                                                                                        for(const propName in changes){
+                                                                                            const chng = changes[propName];
+                                                                                            const cur = JSON.stringify(chng.currentValue);
+                                                                                            const prev = JSON.stringify(chng.previousValue);
+                                                                                            this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue= ${prev}`);
+                                                                                        }
+                                                                                    }
+                                                                                The "ngOnChanges()" method takes an object that maps each changed property name to a SimpleChange object holding the current and previous property values. This hook iterates over the changed properties and logs them.
+                                                                                The example component, "OnChangesComponent", has two input properties: hero and power.
+                                                                                        @Input() hero!: Hero;
+                                                                                        @Input() power = '';
+                                                                                The host "OnChangesParentComponent" binds to them as follows. 
+                                                                                    <on-change [hero]="hero" [power]="power">
+                                                                                    </on-changes>
+                                                                                The log entries appear as the string value of the power property changes. Notice, however, that the "ngOnChnages()" method does not catch changes to "herona.name". This is because Angular calls the hook only when the value of the input property chnages. In this case, hero is the input property, and the value of the hero property is the reference to the hero object. THe object reference did not change when the value of its own name property chnaged.
+
+
 
 
 
