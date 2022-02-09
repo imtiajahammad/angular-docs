@@ -336,6 +336,29 @@ GETTING STARTED:
                                                                         </form>
                                                                         After putting a few items in the cart, users can review their items, enter their name and address, and submit their purchase.
                                                                         To confirm submission, open the console to see an object containing the name and address you submitted.
+            Deploying an application:   Deploying your application is the process of compiling, or building, your code and hosting the JavaScript, CSS, and HTML on a web server.
+                Prerequisite:
+                                * Node.js
+                                * The "Angular CLI". From the terminal, install the Angular CLI globally with:
+                                        npm install -g @angular/cli
+                Running your applicatin locallY:
+                                1. Download the source code from your StackBlitz project by clicking the Download Project icon in the left menu, across from Project, to download your project as a zip archive.
+                                2. Unzip the archive and change directory to the newly created project. For example:
+                                    cd angular-ynqttp
+                                3. To download and install npm packages, use the following npm CLI command:
+                                    npm install
+                                4. Use the following CLI command to run your application locally:
+                                    ng server
+                                5. To see your application in the browser, go to http://localhost:4200/. If the default port 4200 is not available, you can specify another port with the port flag as in hte following example:
+                                    ng serve --port 4201
+                                    While serving your application, you can edit your code and see the changes update automatically in the browser. To stop the ng serve command, press Ctrl_c
+                BUilding and hosting your application:
+                                1. To build you application for production, use the "build" command. By default, this command uses the "production" build configuration.
+                                    ng build
+                                This command creates a "dist" folder in the application root directory with all the files that a hosting service needs for serving your application.
+                                    If the above "ng build" command throws an error about missing packages, append the missing dependencies in your projects's "package.json" file to match the one in the downloaded StackBlitz project.
+                                2. Copy the contents of the "dist/my-project-name" folder your web server. Because these files are static, you can host them on any web server capable of serving files; such as "Node.js", "Java", ".NET", or any backend such as "Firebase", "Google Cloud", or "App Engine".
+
 
 
 
