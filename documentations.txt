@@ -524,6 +524,9 @@ Understanding Angular:
                                                                                             ngAfterContentChecked():
                                                                                                             Purpose: Respond after Angular checks the content projected into the directive or component
                                                                                                             Timing: Called after "ngAfterContentInti()" and every subsequent "ngDoCheck()"
+                                                                                            ngAfterViewChecked():
+                                                                                                            Purpose: Respond after Angular checks the component's views and child views, or the view that contains the directive.
+                                                                                                            Timing: Called after the "ngAfterViewInit()" and every subsequent "ngAfterContentChecked()".
                                                                                             
 
 
