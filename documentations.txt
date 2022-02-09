@@ -484,6 +484,28 @@ Understanding Angular:
                                                                             styles: ['h1{ font-weight: normal; }']
                                                                         })
                                                                     The "styles" property takes an array of strings that contain the CSS rule declarations.
+                                    Component Lifcycle:
+                                                        A component instance has a lifecycle that starts when Angular instantiates the component class and renders the componenet view along with its child views. The lifecycle continues with chnage detection, as Angular checks to see when data-bound properties change, and updates both the view and the component instance as needed. The lifecycle ends when Angular destroys the component instance and removed its rendered template from the DOM. Directives have a similar lifecycle, as Angular creates, updates , and destroys instances in the course of execution.
+                                                        Your application can use "lifecycle hook methods" to tap into key events in the lifecycle of a component or directive to initialize new instances, initiate change detection when needed, respond to updates during change detection, and clean up before deletion of instances.
+
+                                                        Prerequisites:
+                                                                        * TypeScript programming
+                                                                        * Angular app-design fundamentals, as described in "Angular Concepts"
+                                                        Responding to lifecycle events:
+                                                                        Respond to events in the lifecycle of a component or directive by implementing one or more of the livecycle hook interfaces in the Anglar "core" library. The hooks give you the opportunity to act on a component or directive instance at the appropriate moment, as Angular creates, updates, or destroys that instance.
+                                                                        Each interface defines the prototype for a single hook method, whose name is the interface name prefixed with "ng". For example, the "OnInit" interface has a hook method named "ngOnInit()". If you implement this method in your component or directive class, Angular calls it shortly after checking the input properties for that component or directive for the first time
+                                                                            @Directive({selector:'[appPeekaBoo]'})
+                                                                            export class PeekABooDirective implements OnInit{
+                                                                                constructor(private logger: LoggerService){}
+                                                                                // implement OnInit's `ngOnInit` method
+                                                                                ngOnInit(){
+                                                                                    this.logIt('OnInit');
+                                                                                }
+                                                                                logIt(msg: string){
+                                                                                    this.logger.log(`#${nextId++} ${msg}`);
+                                                                                }
+                                                                            }
+                                                                        You do not have to implement all of the lifecycle hooks, just the ones you need.
 
 
 
