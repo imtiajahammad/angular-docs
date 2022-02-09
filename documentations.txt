@@ -588,7 +588,12 @@ Understanding Angular:
                                                                                                             </p>
                                                                                                         Each spy's creation and destruction marks the appearance and disappearance of the attached hero <div> with an entry in the "Hook Log". Adding a hero results in a new hero <div>. The spy's "ngOnInit()" logs that event.
                                                                                                         The "Reset" button clears the "heroes" list. Angular removes all hero <div> elements from the DOM and destroys their spy directives at the same time. The spy's "ngOnDestroy()" nethod report its last moments.
-                                                                        
+                                                                        Use component and directive hooks together:
+                                                                                                        In this example, a "CounterComponent" uses the "ngOnChanges()" method to log a chnage every time the parent component increments its input "counter" property
+                                                                                                        This example applies the "SpyDirective" from the previous example to the "CounterComponent" log, to watch the creation and destruction of log entries.
+                                              
+
+
 
 
 
