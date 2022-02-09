@@ -562,6 +562,34 @@ Understanding Angular:
                                                                                                                         The sequence of log messages follows the prescibed hook calling order: OnChanges, OnInt, Docheck(2x), AfterContentInit, AfterContentChecked(2x), AfterViewInit, AfterViewChecked(3x), and OnDestroy.
                                                                                                                         Notice that the log confirms that input properties(the name property in this case) have no assigned values at construction. The input properties are available to the "OnInit()" method for further initialization.
                                                                                                                         Had the user clicked the "Update Hero" button, the log would show another Onchanges and two more triplets of DoCheck, AfterContentChecked and AfterViewChecked. Notice that these three hooks fire ofter, so it is important to keep their logic as lean as possible.
+                                                                        Use directives to watch the DOM: 
+                                                                                                        The "Spy" example demonstrate how to use the hook method for directives as well as components. The "SpyDirective" implements two hooks, "ngOnInit()" and "ngOnDestroy()", to discover when a watched element is in the current view.
+                                                                                                        This template applies the "SpyDirective" to a <div> in the "ngFor" hero repeater managed by the parent "SpyComponent". 
+                                                                                                        The example does not perform any initialization or clean-up. It just tracks the appearance and disappearance of an element in the view by recording when the directive itself is instantiated and destroyed.
+                                                                                                        A spy directive like this can provide insight into a DOM object that you can not change directly. You can not touch the implementation of a built-in <div>, or modify a third party component. You can, however watch these elements with a directive.
+                                                                                                        The directive defines "ngOnInit()" and "ngOnDestroy()" hooks that log messages to the parent using an injected "LoggerService".
+                                                                                                            let nextId=1;
+                                                                                                            // Spy on any element to which it is applied. 
+                                                                                                            // Usage: <div appSpy>...</div>
+                                                                                                            @Directive({selector: '[appSpy]'})
+                                                                                                            expoert class SpyDirective implements OnInit, OnDestroy{
+                                                                                                                private id=nextId++;
+                                                                                                                constructor(private logger:LoggerService){}
+                                                                                                                ngOnInit(){
+                                                                                                                    this.logger.log(`Spy #${this.id} onInit`);
+                                                                                                                }
+                                                                                                                ngOnDestroy(){
+                                                                                                                    this.logger.log(`Spy #${this.id} onDestroy`);
+                                                                                                                }
+                                                                                                            }
+                                                                                                        Apply the spy to any built-in or component element, and see that it is initialized and destroyed at the same time as that element. Here it is attached to the reapeated hero <div>;
+                                                                                                            <p *ngFOr="let hero of heroes" appSpy>
+                                                                                                            {{hero}}
+                                                                                                            </p>
+                                                                                                        Each spy's creation and destruction marks the appearance and disappearance of the attached hero <div> with an entry in the "Hook Log". Adding a hero results in a new hero <div>. The spy's "ngOnInit()" logs that event.
+                                                                                                        The "Reset" button clears the "heroes" list. Angular removes all hero <div> elements from the DOM and destroys their spy directives at the same time. The spy's "ngOnDestroy()" nethod report its last moments.
+                                                                        
+
 
 
 
