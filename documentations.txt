@@ -539,6 +539,7 @@ Understanding Angular:
                                                                                     DoCheck: Implements the "ngDoCheck()" method with custom change detection. Watch the hook post changes to a log to see how often Angular calls this hook.
                                                                                     AfterView: Shows what Angular means by a view. Demonstrates the "ngAfterViewInit()" and "ngAfterViewChecked()" hooks.
                                                                                     AfterContent: Shows how to project external content into a component and how to distinguish projeted content from a component's view children. Demonstrates the "ngAfterContentInit()" and "ngAfterContentChecked()" hooks.
+                                                                                    Counter: Demonstrates a combination of a component and a directive, each with its own hooks.
 
 
 
