@@ -515,7 +515,10 @@ Understanding Angular:
                                                                                             ngOnInit():
                                                                                                             Purpose: Initialize the directive or component after Angular first displays the data-bound properties and sets the directive or component's input properties.
                                                                                                             Timing: Called once, after the first "ngOnChnages()". "ngOnInit()" is still called even when "ngOnChanges()" is not (which is the case when there are no template-bound inputs).
-                                                                                            
+                                                                                            ngDoCheck():
+                                                                                                            Purpose: Detect and act upon changes that Angular can not or will not detect on its own.
+                                                                                                            Timing: Called immediately after "ngOnChanges()" on every change detection run, and immediately after "ngOnInti()" on the first run.
+                                                                                           
 
 
 
