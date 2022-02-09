@@ -358,6 +358,38 @@ GETTING STARTED:
                                 This command creates a "dist" folder in the application root directory with all the files that a hosting service needs for serving your application.
                                     If the above "ng build" command throws an error about missing packages, append the missing dependencies in your projects's "package.json" file to match the one in the downloaded StackBlitz project.
                                 2. Copy the contents of the "dist/my-project-name" folder your web server. Because these files are static, you can host them on any web server capable of serving files; such as "Node.js", "Java", ".NET", or any backend such as "Firebase", "Google Cloud", or "App Engine".
+    Setup:
+            Setting up the local environment and workspace:
+                                Prerequisites:
+                                                * JavaScript
+                                                * HTML
+                                                * CSS
+                                    Knowledge of "TypeScript" is helpful, but not required.
+                                    To install Angular on your local system, you need the following
+                                        * Node.js: Angular requires an active LTS or maintenance LTS version of Node.js
+                                        * npm package manager: Angular, the Angluar CLI, and Angular applications depend on "npm packages" for many features and functions. To download and install npm packages, you need an npm package manager. This guide uses the "npm client" command line interface, which is installed with "Node.js" by default. To check that you have the npm client installed, run npm -v in a terminal window.
+                                Install the Angular CLI:
+                                                    You use the Angular CLI to create projects, generate application and library code, and perform a vaiety of ongoing development tasks such as testing, bundling, and deployment.
+                                                    To install the Angular CLI, open terminal window and run the following command:
+                                                        npm install -g @angular/cli
+                                                    Create a workspace and initial application:
+                                                        You develop apps in the ocntext of an Angular workspace. 
+                                                        To create a new workspace and initial started app:
+                                                            1. Run the CLI command "ng new" and provide the name "my-app", as shown here:
+                                                                ng new my-app
+                                                            2. The "ng new" command prompts you for informaton about features to include in the initial app. Accept the defaults by pressing the Enter or Return key.
+                                                            
+                                                        The Angular CLI installs the necessary Angular npm packages and other dependencies. This can take a few minutes.
+                                                        The CLI creates a new workspace and a simple Welcome app, ready to run
+                                Run the application: 
+                                                        The Angular CLI inclutes a server, for you to build and serve your app locally. 
+                                                            1. Navigate to the workspace folder, such as "my-app"
+                                                            2. Run the following command
+                                                                cd my-app
+                                                                ng serve --open
+                                                                The "ng server" command launches the server, watches your files, and rebuilds the app as you make changes to those files.
+                                                                The --open option automatically opens your browser to ""http://localhost:4200/"
+                                                                If your installation and setup was successful, you should see a page similar to the following.
 
 
 
