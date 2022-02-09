@@ -527,7 +527,9 @@ Understanding Angular:
                                                                                             ngAfterViewChecked():
                                                                                                             Purpose: Respond after Angular checks the component's views and child views, or the view that contains the directive.
                                                                                                             Timing: Called after the "ngAfterViewInit()" and every subsequent "ngAfterContentChecked()".
-                                                                                            
+                                                                                            ngOnDestroy():
+                                                                                                            Purpose: Cleanup just before Angular destroys the directive or component. Unsubscribe Observables and detach event handlers to avoid memory leaks.
+                                                                                                            Timing: Called immediately before Angular destroys the directive or component.
 
 
 
