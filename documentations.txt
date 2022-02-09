@@ -518,7 +518,10 @@ Understanding Angular:
                                                                                             ngDoCheck():
                                                                                                             Purpose: Detect and act upon changes that Angular can not or will not detect on its own.
                                                                                                             Timing: Called immediately after "ngOnChanges()" on every change detection run, and immediately after "ngOnInti()" on the first run.
-                                                                                           
+                                                                                           ngAfterContentInit():
+                                                                                                            Purpose: Respond after Angular projects external content into the component's view, or into the view that a directive is in.
+                                                                                                            Timing: Called once after the first "ngDoCheck()"
+
 
 
 
