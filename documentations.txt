@@ -534,6 +534,8 @@ Understanding Angular:
                                                                                     The live example/ download example demonstrates the use of lifecycle hooks through a series of exercises prented as components under the control of the root "AppComponent". In each case a prent compoenent serves as a test rig for a child component that illustrates one or more of the lifecycle hook methods.
                                                                                     The following table lists the exercises with brief descriptions. The sample code is also used to illustrate specific tasks in the following sections.
                                                                                     Peek-a-boo: Demonstrates every "lifecycle hook". Each hook method writes to the on-screen log.
+                                                                                    Spy: Shows how to use lifecycle hooks with a custom directive. The "SpyDirective" implements the "ngOnInti()" and "ngOnDestroy()" hooks, and uses them to watch and report when an element goes in or out of the current view.
+                                                                                    
 
 
 
