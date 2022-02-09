@@ -609,6 +609,113 @@ Understanding Angular:
                                                                                     <on-change [hero]="hero" [power]="power">
                                                                                     </on-changes>
                                                                                 The log entries appear as the string value of the power property changes. Notice, however, that the "ngOnChnages()" method does not catch changes to "herona.name". This is because Angular calls the hook only when the value of the input property chnages. In this case, hero is the input property, and the value of the hero property is the reference to the hero object. THe object reference did not change when the value of its own name property chnaged.
+                                                                    Responding to view changes:
+                                                                                                As Angular traverses the view hierarchy during change detection, it needs to be sure that a change in a child does not attempt to cause a change in its own parent. Such a change would not be rendered properly, becaouse of how uniderectional data flow works
+                                                                                                If you need to make a change that inverts the expected data flow, you must trigger a new change detection cycle to allow that change to be rendered. The examples illustrate how to make such chagnes safely.
+                                                                                                The AfterView sample explores the "AfterViewInit()" and "AfterViewhecked()" hooks that Angular calls after it creates a component's child views.
+                                                                                                Here's a child view that displays a hero's name in an <input>:
+                                                                                                    @Component({
+                                                                                                        selector: 'app-child-view',
+                                                                                                        template:`
+                                                                                                            <label for="hero-name">Hero name: </label>
+                                                                                                            <input type="text" id="hero-name" [(ngModel)]="hero">
+                                                                                                        `
+                                                                                                    })
+                                                                                                    export class ChildViewComponent{
+                                                                                                        hero= 'Magneta';
+                                                                                                    }
+                                                                                                The "AfterViewComponent" displays this child view within its template:
+                                                                                                    template: `
+                                                                                                                <div> child view begins</div>
+                                                                                                                <app-child-view></app-child-view>
+                                                                                                                <div> child view ends</div>
+                                                                                                                `
+                                                                                                The following hooks take action based on chnaging values within the child view, which can only be reached by querying for the child view using the property decorated with @ViewChild.
+                                                                                                    export class AgterViewComponent implements AfterViewChecked, AfterViewInit{
+                                                                                                        private preHero='';
+                                                                                                        //Query for a VIEW child of type `ChildViewComponent`
+                                                                                                        @ViewChild(ChildViewComponent) viewChild !: ChildViewComponent;
+
+                                                                                                        ngAfterViewInit(){
+                                                                                                            //viewChild is set after the view has been initialized
+                                                                                                            this.logIt('AfterViewInit');
+                                                                                                            this.doSomething();
+                                                                                                        }
+                                                                                                        ngAfterViewChecked(){
+                                                                                                            // viewChild is updated after the view has been Checked
+                                                                                                            if(this.prevHero === this.viewChild.hero){
+                                                                                                                this.logId('AfterViewChecked (no change)');
+                                                                                                            }
+                                                                                                            else{
+                                                                                                                this.prevHero = this.viewChild.hero;
+                                                                                                                this.logId('AfterViewCHecked');
+                                                                                                                this.doSomething();
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                Wait before updating the view:
+                                                                                                                In this example, the "doSomething()" method updates the screen when the hero name exceeds 10 characters, but waits a tick before updating comment.
+                                                                                                                    // This surrogate for real business logic sets the 'comment'
+                                                                                                                    private doSomething(){
+                                                                                                                        const c = this.viewChild.hero.length> 10 ? "That's a long name" : '';
+                                                                                                                        if(c !== this.comment){
+                                                                                                                            // Wait a tick because the component's view has already been Checked
+                                                                                                                            this.logger.tick_then(() => this.comment =c);
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                Both the "AfterViewInit()" and "AfterViewChecked()" hooks fire after the component's view is composed. If you modify the code so that the hook updates the componnet's data-bound comment property immediately, you can see that Angular throws an error.
+                                                                                                                The "LoggerService.tick_then()" statement postpones the log update for one turn of the browser's JavaScript cycle, which triggers a new change-detection cycle.
+                                                                                                Write lean hook methods to avoid performance problems:
+                                                                                                                When you run the "AfterView" sample, notice how frequently Angular calls "AfterViewChecked()" - ofter when there are no changes of interest. Be very careful about how much logic or computation you put into one of these methods.
+                                                                    Responding to projected content changes:
+                                                                                                                Content projection is a way to import HTML content from outside the component and insert that content into the component's template in a designated spot. Identify content projection in a template by looking for the following constructs.
+                                                                                                                    * HTML between component element tags
+                                                                                                                    * The presence of <ng-content> tags in the component's template
+                                                                                                                The "AfterContent" sample explores the "AfterContentInit()" and "AfterContentChecked()" hooks that Angular calls after Angular projects external content into the component.
+                                                                                                                Consider this variation on the previous AfterView example. This time, instead of including the child view within the template, it imports the content from the "AfterContentComponent" parent. The following is the parent's template.
+                                                                                                                    `<after-content>
+                                                                                                                    <app-child></app-child>
+                                                                                                                    </after-content>`
+                                                                                                                Notice that the <app-child> tag is tucked between the <after-content> tags. Never put content between a component's element tags unless you intend to project that content into the component.
+                                                                                                                Now look at the component's template
+                                                                                                                    template:
+                                                                                                                        `<div> projected content begins</div>
+                                                                                                                        <ng-content></ng-content>
+                                                                                                                        <div> projected content ends </div>
+                                                                                                                        `
+                                                                                                                The <ng-content> tag is a placeholder for the external content. It tell Angular where to insert that content. In this case, the projected content is the <app-child> from the parent.
+                                                                                                                Using AfterContent hooks:
+                                                                                                                                        AfterContent hooks are similar to the AfterView hooks. The key difference is in the child component.
+                                                                                                                                            * The AfterView hooks concern "ViewChildren", the child components whose element tags appear within the component's template
+                                                                                                                                            * The AfterContent hooks concern "ContentChildren", the child components that Angaulr projected into the component.
+                                                                                                                                        The follwoing "AfterContent" hooks take action based on changing values in a content child, whic can only be reached by query ing for them using hte property decorated with "@ContentChild".
+                                                                                                                                            export class AfterContentComponent implements AfterContentChecked, AfterContentInit{
+                                                                                                                                                private prevHero='';
+                                                                                                                                                comment = '';
+                                                                                                                                                // Query for a CONTENT child of type `ChildComponent`
+                                                                                                                                                @ContentChilid(ChildComponent) contentChild !: ChildComponent;
+                                                                                                                                                ngAfterContentInit(){
+                                                                                                                                                    // contentChild is set after the content has been initialized
+                                                                                                                                                    this.logIt('AfterContentInit');
+                                                                                                                                                    this.doSomething();
+                                                                                                                                                }
+                                                                                                                                                ngAfterContentChecked(){
+                                                                                                                                                    // contentchild is updated after the content has been Checked
+                                                                                                                                                    if(this.prevHero === this.contentChild.hero){
+                                                                                                                                                        this.logIt('AfterContentChecked (no change)');
+                                                                                                                                                    }
+                                                                                                                                                    else{
+                                                                                                                                                        this.prevHero = this.contentChild.hero;
+                                                                                                                                                        this.logIt('AfterContentChecked');
+                                                                                                                                                        this.doSomething();
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                        This component's doSomething() method updates the component's data-bound comment property immediately. There's no need to delay the update to ensure proper rendering.
+                                                                                                                                        Angular calls both AfterContent hooks before calling either of the AfterView hooks.
+                                                                                                                                        Angular completes composition of the projected content before finishing the composition of this compoenent's view. There is a small window between the AfterContent.. and AfterView.. hooks that lets you modify the host view.
+                                                                                                                                        
+
 
 
 
