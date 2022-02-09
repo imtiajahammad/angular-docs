@@ -521,6 +521,10 @@ Understanding Angular:
                                                                                            ngAfterContentInit():
                                                                                                             Purpose: Respond after Angular projects external content into the component's view, or into the view that a directive is in.
                                                                                                             Timing: Called once after the first "ngDoCheck()"
+                                                                                            ngAfterContentChecked():
+                                                                                                            Purpose: Respond after Angular checks the content projected into the directive or component
+                                                                                                            Timing: Called after "ngAfterContentInti()" and every subsequent "ngDoCheck()"
+                                                                                            
 
 
 
