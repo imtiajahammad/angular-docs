@@ -390,6 +390,12 @@ GETTING STARTED:
                                                                 The "ng server" command launches the server, watches your files, and rebuilds the app as you make changes to those files.
                                                                 The --open option automatically opens your browser to ""http://localhost:4200/"
                                                                 If your installation and setup was successful, you should see a page similar to the following.
+Understanding Angular:
+                        Overview: To  understand the capabilities of the Angular framework, you need to learn about the following:
+                            * Components
+                            * Templates
+                            * Directives
+                            * Dependency injection
 
 
 
