@@ -546,6 +546,13 @@ Understanding Angular:
                                                                                     * Set up the component after Angular sets the input properties. Constructors should do no more than set the initial local variables to simple values.
                                                                                       Keep in mind that a directive's data-bound input properties are not set until after construction. If you need to initialize the directive based on those properties, set them when "ngOnInit()" runs.
                                                                                       The "ngOnChanges()" method is your first opportunity to access those properties. Angular calls "ngOnChanges()" before "ngOnInit()", but also many times after that. It only calls "ngOnInit()" once.
+                                                        Cleaning up on instance destruction: 
+                                                                                    Put cleanup logic in "ngOnDestroy()", the logic that must run before Angular destroys the directive. 
+                                                                                    This is the place to free resources that won't be garbage-collected automatically. You risk memory leaks if you neglect to do so.
+                                                                                        * Unsubscribe from Observables an DOM events.
+                                                                                        * Stop  interval times.
+                                                                                        * Unregister all callbacks that the directive registered with global or application services.
+                                                                                    The "ngOnDestroy()" method is also the time to notify another part of the application that the component is going away.
                                                         
 
 
