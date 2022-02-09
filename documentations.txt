@@ -535,6 +535,7 @@ Understanding Angular:
                                                                                     The following table lists the exercises with brief descriptions. The sample code is also used to illustrate specific tasks in the following sections.
                                                                                     Peek-a-boo: Demonstrates every "lifecycle hook". Each hook method writes to the on-screen log.
                                                                                     Spy: Shows how to use lifecycle hooks with a custom directive. The "SpyDirective" implements the "ngOnInti()" and "ngOnDestroy()" hooks, and uses them to watch and report when an element goes in or out of the current view.
+                                                                                    OnChanges: Demonstrates how Angular calls the "ngOnChanges()" hook every time one of the component input properties changes, and shows how to interpret the "changes" object passed to the hook method.
                                                                                     
 
 
