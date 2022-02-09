@@ -540,8 +540,13 @@ Understanding Angular:
                                                                                     AfterView: Shows what Angular means by a view. Demonstrates the "ngAfterViewInit()" and "ngAfterViewChecked()" hooks.
                                                                                     AfterContent: Shows how to project external content into a component and how to distinguish projeted content from a component's view children. Demonstrates the "ngAfterContentInit()" and "ngAfterContentChecked()" hooks.
                                                                                     Counter: Demonstrates a combination of a component and a directive, each with its own hooks.
-
-
+                                                        Initializing a component or directive:
+                                                                                    * Perform complex initializations outside of the constructor. Components should be creap and safe to construct. You should not, for example, fetch data in a component constructor. You should not worry that a new componnet will try to contact a remote server when created under test or before you decide to display it.
+                                                                                      An "ngOnInt()" is a good place for a component to fetch its initial data.
+                                                                                    * Set up the component after Angular sets the input properties. Constructors should do no more than set the initial local variables to simple values.
+                                                                                      Keep in mind that a directive's data-bound input properties are not set until after construction. If you need to initialize the directive based on those properties, set them when "ngOnInit()" runs.
+                                                                                      The "ngOnChanges()" method is your first opportunity to access those properties. Angular calls "ngOnChanges()" before "ngOnInit()", but also many times after that. It only calls "ngOnInit()" once.
+                                                        
 
 
 
