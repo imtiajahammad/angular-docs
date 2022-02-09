@@ -451,7 +451,24 @@ Understanding Angular:
                                                                         @Component({
                                                                             selector: 'app-comonent-overview',
                                                                         })
-
+                                                Defining a component's template:
+                                                                    A template is a block of HTML that tells Angular how to render the component in your application. Define a template for your component in one of two ways; by referncing an external file, or directly within the component.
+                                                                    To define a template as an external file, add a "teplateUrl" property to the "@Component" decorator.
+                                                                        @Component({
+                                                                            selector: 'app=component-overview',
+                                                                            templateUrl: './component-overview.compoenent.html',
+                                                                        })
+                                                                    To define a template within the component, add a "template" property to the "@Component" decorator that contains the HTML you want to use.
+                                                                        @Component({
+                                                                            selector: 'app-component-overview',
+                                                                            template: '<h1>Hello World!</h1>',
+                                                                        })
+                                                                    If you want your template to span multiple lines, use backticks ('). For example:
+                                                                        @Component({
+                                                                            selector: 'app-component-overview',
+                                                                            template: `<h1>Hello World!</h1>
+                                                                            <p>This template definition spans multiple lines</p>`
+                                                                        })
 
 
 
