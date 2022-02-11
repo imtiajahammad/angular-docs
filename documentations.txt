@@ -788,4 +788,50 @@ Understanding Angular:
                                                                                       Styles of "ViewEncapsulation.Emulated" and "ViewEncapsulation.None" components are also added to the shadow DOM host of each "ViewEncaplulation.ShadowDom" component.
                                                                                       This means that styles for components with "ViewEncapsulation.None" will affect matching elements within shadow DOMs.
                                                                                       This approach may seem counter-intuitive at first, but without it a component with "ViewEncapsulation.None" would be rendered differently within a component using "ViewEncapsulation.ShadowDom", since its styles would not be available.
-                                                            
+                                                            Examples: 
+                                                                        This section shows example of how the styling of components with different "ViewEncapsulation" interact. See the live example(https://stackblitz.com/run?file=src/app/app.component.ts) to try out these components yourself
+                                                                        No encapsulation: This first example show a component that has "ViewEncapsulation.None". This component colors its template elements red.
+                                                                            @Component({
+                                                                                selector: `app-no-encapsulation`,
+                                                                                template:`
+                                                                                        <h2>None</h2>
+                                                                                        <div class="none-message">No encapsulation</div>
+                                                                                            `
+                                                                                styles: ['h2, .none-message { color: red;}'],
+                                                                                encapsulation: ViewEncapsulation.None,
+                                                                            })
+                                                                            export class NoEncapsulationComponent{}
+                                                                        Angular adds the styles for this component as global styles to the <head> of the document.
+                                                                        As already mentioned Angular also adds the styles to all shadow DOM hosts. Therefore, the styles are available throughout the whole application.
+                                                                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            
+
+
+                                                                                                                
+
+
+
+
+
+
+
