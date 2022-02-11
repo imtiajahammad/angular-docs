@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ShippingComponent } from './shipping/shipping.component';
 import { NoEncapsulationComponent } from './no-encapsulation/no-encapsulation.component';
 import { EmulatedEncapsulationComponent } from './emulated-encapsulation/emulated-encapsulation.component';
+import { ShadowDomEncapsulationComponent } from './shadow-dom-encapsulation/shadow-dom-encapsulation.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { EmulatedEncapsulationComponent } from './emulated-encapsulation/emulate
     CartComponent,
     ShippingComponent,
     NoEncapsulationComponent,
-    EmulatedEncapsulationComponent
+    EmulatedEncapsulationComponent,
+    ShadowDomEncapsulationComponent
   ],
   imports: [ 
     BrowserModule

@@ -816,7 +816,26 @@ Understanding Angular:
                                                                         Similar to "ViewEncapsulation.None", Angular adds the styles for this component to the <head> of the document, but with "scoped" styles.
                                                                         Therefore, only the elements directly within this component's template will match its styles. Since the "scoped" styles from the "EmulatedEncapsulationComponent" are very specific, they override the global styles from the "NoEncapsulationComponent".
                                                                         In this example, the "EmulatedEncapsulationComponent" contains a "NoEncapsulationComponent", but "NoEncapsulationComponent" is still styled as expected since the "EmulatedEncapsulationComponent" "scoped" styles do not match elements in its template.
-                                                                         
+                                                                        Shadow DOM encapsulation: The third example shows a component that has "ViewEncapsulation.ShadowDom". This component colors its template elements blue.
+                                                                            @Component({
+                                                                                selector: 'app-shadow-dom-encapsulation',
+                                                                                template: `
+                                                                                    <h2>ShadowDom</h2>
+                                                                                    <div class="shadow-message">Shadow DOM encapsulation</div>
+                                                                                    <app-emulated-encapsulation></app-emulated-encapsulation>
+                                                                                    <app-no-encapsulation></app-no-encapsulation>`,
+                                                                                styles: ['h2, .shadow-message { color: blue; }'],
+                                                                                encapsulation: ViewEncapsulation.ShadowDom,
+                                                                            })
+                                                                            export class ShadowDomEncapsulationComponent { }
+                                                                        Angular adds styles for this component only to the shadow DOM host, so they are not visible outsite the shadow DOM.
+                                                                        Note that Angular also adds the global styles from the "NoEncapsulationComponent" and "EmulatedEncapsulationComponent" to the shadow DOM host, so those styles are still available to the elements in the template of this component.
+                                                                        In this example, the "ShadowDomEncapsulationComponent" contains both a "NoEncapsulationComponent" and "EmulatedEncapsulationComponent".
+                                                                        The styles added by the "ShadowDomEncapsulationComponent" component are available throughout the shadow DOM of this component, and so to both the "NoEncapsulationComponent" and "EmulatedEncapsulationComponent".
+                                                                        The "EmulatedEncapsulationComponent" has specific "scoped" styles, so the styling of this component's template is unaffected.
+                                                                        But since styles from "ShadowDomEncapsulationComponent" are added to the shadow host after the global styles, the h2 style overrides the style from the "NoEncapsulationComponent". The result is that the <h2> element in the "NoEncapsulationComponent" is colored blue rather than red, which may not be what the component's author intended.
+
+                                                                            
 
 
 
