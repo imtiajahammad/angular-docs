@@ -803,7 +803,20 @@ Understanding Angular:
                                                                             export class NoEncapsulationComponent{}
                                                                         Angular adds the styles for this component as global styles to the <head> of the document.
                                                                         As already mentioned Angular also adds the styles to all shadow DOM hosts. Therefore, the styles are available throughout the whole application.
-                                                                        
+                                                                        Emulated encapsulation: The second example shows a component that has "ViewEncapsulation.Emulated". This component colors its template elements green.
+                                                                            @Component({
+                                                                                selector: 'app-emulated-encapsulation',
+                                                                                template:  `<h2>Emulateed</h2>
+                                                                                <div class="emulated-message">Emulated encapsulation</div>
+                                                                                <app-no-capsulation></app-no-capsulation>`,
+                                                                                styles: ['h2, .emulated-message { color:green; }'],
+                                                                                encapsulation: ViewEncapsulation.Emulated,
+                                                                            })
+                                                                            export class EmulatedEncapsulationComponent{}
+                                                                        Similar to "ViewEncapsulation.None", Angular adds the styles for this component to the <head> of the document, but with "scoped" styles.
+                                                                        Therefore, only the elements directly within this component's template will match its styles. Since the "scoped" styles from the "EmulatedEncapsulationComponent" are very specific, they override the global styles from the "NoEncapsulationComponent".
+                                                                        In this example, the "EmulatedEncapsulationComponent" contains a "NoEncapsulationComponent", but "NoEncapsulationComponent" is still styled as expected since the "EmulatedEncapsulationComponent" "scoped" styles do not match elements in its template.
+                                                                         
 
 
 

@@ -13,6 +13,7 @@ import { CartComponent } from './cart/cart.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ShippingComponent } from './shipping/shipping.component';
 import { NoEncapsulationComponent } from './no-encapsulation/no-encapsulation.component';
+import { EmulatedEncapsulationComponent } from './emulated-encapsulation/emulated-encapsulation.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NoEncapsulationComponent } from './no-encapsulation/no-encapsulation.co
     ProductDetailsComponent,
     CartComponent,
     ShippingComponent,
-    NoEncapsulationComponent
+    NoEncapsulationComponent,
+    EmulatedEncapsulationComponent
   ],
   imports: [ 
     BrowserModule
