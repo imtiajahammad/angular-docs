@@ -15,6 +15,8 @@ import { ShippingComponent } from './shipping/shipping.component';
 import { NoEncapsulationComponent } from './no-encapsulation/no-encapsulation.component';
 import { EmulatedEncapsulationComponent } from './emulated-encapsulation/emulated-encapsulation.component';
 import { ShadowDomEncapsulationComponent } from './shadow-dom-encapsulation/shadow-dom-encapsulation.component';
+import { HeroChildComponent } from './hero-child/hero-child.component';
+import { HeroParentComponent } from './hero-parent/hero-parent.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { ShadowDomEncapsulationComponent } from './shadow-dom-encapsulation/shad
     ShippingComponent,
     NoEncapsulationComponent,
     EmulatedEncapsulationComponent,
-    ShadowDomEncapsulationComponent
+    ShadowDomEncapsulationComponent,
+    HeroChildComponent,
+    HeroParentComponent
   ],
   imports: [ 
     BrowserModule
