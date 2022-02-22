@@ -890,6 +890,63 @@ Understanding Angular:
                                                                         //Displays 'Dr IQ', '<no name set>', 'Bombasto'
                                                                         names = ['Dr IQ', '  ','    Bombasto    '];
                                                                     )
+                                                            Intercept input property changes with ngOnChanges():
+                                                                Detect and act upon changes to input property values with the "ngOnChanges()" method of the "OnChanges" lifecycle hook interface.
+                                                                This "VersionChildComponent" detects changes to the "major" and "minor" input properties and composes a log message reporting these changes-
+                                                                    import { Component, Input, OnChanges, SimpleChanges }   from '@angular/core';
+                                                                    @Component({
+                                                                        selector: 'app=version-child',
+                                                                        template: `
+                                                                                    <h3>Version {{major}}.{{minor}}</h3>
+                                                                                    <h4>Change log:</h4>
+                                                                                    <ul>
+                                                                                        <li *ngFor="let change of changeLog">{{change}}
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                    `
+                                                                    })
+                                                                    export class VersionChildComponent implements OnChanges{
+                                                                        @Input() major= 0;
+                                                                        @Input() minor= 0;
+                                                                        changeLog: string[] = [];
+                                                                        ngOnChanges(changes: SimpleChanges){
+                                                                            const log: string[] = [];
+                                                                            for(const propName in changes){
+                                                                                const changedProp = changes[propName];
+                                                                                const to = JSON.stringify(changeProp.currentValue);
+                                                                                if(changedProp.isFirstChange()){
+                                                                                    log.push('Initial value of ${propName} set to ${to}');
+                                                                                } else{
+                                                                                    const from = JSON.stringify(changedProp.previousValue);
+                                                                                    log.push('${propName} changed from ${from} to ${to}');
+                                                                                }
+                                                                            }
+                                                                            this.changeLog.push(log.join(', '));
+                                                                        }
+                                                                    }
+                                                                The "VersionParentComponent" supplies the "minor" and "major" values and binds buttons to methods that change them.
+                                                                    import { Component  from '@angular/core';
+                                                                    @Component({
+                                                                        selector: 'app-version-parent',
+                                                                        template: `
+                                                                                    <h2>Source code version</h2>
+                                                                                    <button type="button" (click)="newMinor()">New minor version</button>
+                                                                                    <button type="button" (click)="newMajor()">New major version</button>
+                                                                                    <app-version-child [major]="major" [minor]="minor"></app-version-child>
+                                                                                    `
+                                                                    })
+                                                                    export class VersionParentComponent{
+                                                                        major = 1;
+                                                                        minor = 23;
+                                                                        newMinor(){
+                                                                            this.minor++;
+                                                                        }
+                                                                        newMajor(){
+                                                                            this.major++;
+                                                                            this.minor= 0;
+                                                                        }
+                                                                    }
+
                                                                 
                                                             
                                                                             
