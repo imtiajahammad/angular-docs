@@ -995,7 +995,46 @@ Understanding Angular:
                                                                             }
                                                                         }
                                                                     }
-                                                            The framework passes the event argument-represented by "$event" to the handler method, and the method processes it.
+                                                                The framework passes the event argument-represented by "$event" to the handler method, and the method processes it.
+                                                            Parent interacts with child using local variable:
+                                                                    A parent component can not use data bindng to read child properties or invoke child methods. Do both by creating a template reference variable for the child element and then reference that variable within the parent template as seen in the following example.
+                                                                    The following is a child "CountdownTimerComponent" that repeatedly counts down to zero and launches a racket. The "start" and "stop" methods control the clock and a countdown status message displays in its own template.
+                                                                        import { Component, OnDestroy } from '@angular/core';
+                                                                        @Component({
+                                                                            selector: 'app-countdown-timer',
+                                                                            template: `<p>{{message}}</p>`
+                                                                        })
+                                                                        export class CountdownTimerComponent implements OnDestory{
+                                                                            intervalId = 0;
+                                                                            message = '';
+                                                                            seconds = 11;
+                                                                            ngOnDestroy(){ this.clearTimer();}
+                                                                            start() { this.countDown();}
+                                                                            stop(){
+                                                                                this.clearTimer();
+                                                                                this.message= `Holding at T-${this.seconds}`;
+                                                                            }
+                                                                            private clearTimer() { clearInterval(this.intervalId);}
+                                                                            private countDown(){
+                                                                                this.clearTimer();
+                                                                                this.intervalId = window.setInterval( ()=>{
+                                                                                    this.seconds -=1;
+                                                                                    if(this.seconds === 0){
+                                                                                        this.message = 'Blast off!';
+                                                                                    }
+                                                                                    else{
+                                                                                        if(this.seconds<0){
+                                                                                            this.seconds=10;
+                                                                                        }
+                                                                                        this.message= `T-${this.seconds} seconds and counting`;
+                                                                                    }
+                                                                                },1000  );
+                                                                            }
+                                                                        }
+                                                                    The parent component can not data bind to the child's "start" and "stop" methods nor to its "seconds" property.
+                                                                    Place a local variable, "#timer", on the tag "<countdown-timer>" representing the child component. That gives you a reference to the child component and the ability to access any of its properties or methods from within hte parent template.
+                                                                    This example wires parent buttons to the child's "start" and "stop" and uses interpolation to display the child's "seconds" property.
+                                                                    Here, the parent and child are working together.
 
                                                                 
                                                             
