@@ -1035,6 +1035,46 @@ Understanding Angular:
                                                                     Place a local variable, "#timer", on the tag "<countdown-timer>" representing the child component. That gives you a reference to the child component and the ability to access any of its properties or methods from within hte parent template.
                                                                     This example wires parent buttons to the child's "start" and "stop" and uses interpolation to display the child's "seconds" property.
                                                                     Here, the parent and child are working together.
+                                                            Parent calls an @ViewChild():
+                                                                    The local variable approach is straightforward. But it is limited because the parent-child wiring must be done entirely within the parent template. The parent component itself has no access to the child.
+                                                                    You can not use the local variable technique if the parent component's class relies on the child component's class. The parent-child relationship of the components is not established within each components respective class with the local variable technique. Because the class instances are not connected to one another, the parent class con not access the child class properties and methods.
+                                                                    When the parent component class requires that kind of access, inject the child component into the parent as a ViewChild.
+                                                                    The following example illustrates this technique with the same "Countdown Timer" example. Neither its appearance not its behavior changes. The child "CountdownTimerComponent" is the same as well.
+                                                                    Here is the parent, "CountdownViewChildParentComponent":
+                                                                        import { AfterViewInit, ViewChild } from '@angular/core';
+                                                                        inport { Component } from '@angular/core';
+                                                                        import { CountdownTimerComponent } from './countdown-timer.component';
+                                                                        @Component({
+                                                                            selector: 'app-countdown-parent-vc',
+                                                                            template: '`
+                                                                                        <h3>Countdown to Liftoff (via ViewChild) </h3>
+                                                                                        <button type="button" (click)="start()">Start</button>
+                                                                                        <button type="button" (click)="stop()">Stop</button>
+                                                                                        <div class="seconds">{{ seconds() }}</div>
+                                                                                        <app-countdown-timer></app-countdown-timer>
+                                                                                        `
+                                                                        })
+                                                                        export class CountdownViewChildParentComponent implements AfterViewInit{
+                                                                            @ViewChild(CountdownTimerComponent)
+                                                                            private timerComponent !: CountdownTimerComponent;
+                                                                            seconds() { return 0; }
+                                                                            ngAfterViewInit(){
+                                                                                // Redefine 'seconds()' to get from the 'CountdownTimerComponent.seconds' 
+                                                                                // but wait a tick first to avoid one-time devMode
+                                                                                // unidirectional-data-flow-violation error
+                                                                                setTimeout( ()=> this.seconds =() => this.timerComponent.seconds, 0);
+                                                                            }
+                                                                            start() { this.timerComponent.start(); }
+                                                                            stop() { this.timerComponent.stop(); }
+                                                                        }
+                                                                    It takes a bit more work to get the child view into the parent component class.
+                                                                    First, you have to import references to the "ViewChild" decoratoir and the "AfterViewInit" lifecycle hook.
+                                                                    Next, inject the child "CountdownTimerComponent" into the private "timerComponent" property using the "@ViewChild" property decoration.
+                                                                    The "#timer" local variable is gone from the component metadata. Instead, bind the buttons to the parent component's own "start" and "stop" methods and present the ticking seconds in an interpolation around the parent component's "seconds" method.
+                                                                    These mehods access the injected timer component directly.
+                                                                    The "ngAfterViewInit()" lifecycle hook is an importatn wrinkle. The timer component is not available until after Angular displays the parent view. So it displays 0 seconds initially.
+                                                                    Then Angular calls the "ngAfterViewInit" lifecycle hook at which timer it is too late to update the parent view's display of the countdown seconds. Angular's unidirectional data flow rule prevents updating the parent view's in the same cycle. The application must wait one turn before it can display the seconds.
+                                                                    Use "setTimeout()" to wait one tick and then revise the "seconds()" method so that it takes future values from the timer component.
 
                                                                 
                                                             
